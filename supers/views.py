@@ -10,7 +10,6 @@ from .models import Super
 def supers_list(request):
     if request.method == 'GET':
         super_type_name = request.query_params.get('super_type')
-        print(super_type_name)
         queryset = Super.objects.all()
 
         if super_type_name:
