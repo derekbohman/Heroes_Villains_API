@@ -16,7 +16,7 @@ def supers_list(request):
             queryset = queryset.filter(super_type__name=super_type_name)
 
         serializer = SuperSerializer(queryset, many=True)
-        return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
     elif request.method == 'POST':
         serializer = SuperSerializer(data=request.data)
@@ -30,13 +30,13 @@ def super_detail(request, pk):
     super = get_object_or_404(Super, pk=pk)
     if request.method == 'GET':   
         serializer = SuperSerializer(super)
-        return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
     elif request.method == 'PUT':
          serializer = SuperSerializer(super, data=request.data)
          serializer.is_valid(raise_exception=True)
          serializer.save()
-         return Response(serializer.data)
+         return Response(serializer.data, status=status.HTTP_200_OK)
 
     elif request.method == 'DELETE':
         super.delete()
