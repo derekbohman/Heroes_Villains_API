@@ -5,10 +5,9 @@ from rest_framework import status
 from super_types.models import SuperType
 from .serializers import SuperSerializer
 from .models import Super
-from supers import serializers
 
 @api_view(['GET'])
-def supers_list(request):
+def supers_list_all(request):
     type_param = request.query_params.get('type')
     supers = Super.objects.all()
     custom_response = {}
@@ -31,7 +30,7 @@ def supers_list(request):
         return Response(custom_response, status=status.HTTP_200_OK)
 
 @api_view(['GET', 'POST'])
-def supers_list_by_type(request):
+def supers_list(request):
     if request.method == 'GET':
         super_type_name = request.query_params.get('type')
         queryset = Super.objects.all()
